@@ -12,5 +12,8 @@ class Environment(object):
         self.speed = 5
 
     def __call__(self):
-        self.rect.left += 1
+        pass
 
+    def draw_bg(self, screen):
+        self.rect.left += 1
+        screen.blit(self.image, self.rect)

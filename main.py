@@ -11,7 +11,7 @@ pygame.display.set_caption('ProterozoicEra')
 environment = Environment()
 environment_msg_text = Text()
 
-
+time_frame = 0
 clock = pygame.time.Clock()
 
 while True:
@@ -21,11 +21,9 @@ while True:
         if event.type == pygame.QUIT:
             sys.exit()
 
-    text_obj_render, text_rect = environment_msg_text('ProterozoicEra')
-    environment()
-    screen.blit(environment.image, environment.rect)
-    screen.blit(text_obj_render, text_rect)
-
+    environment.draw_bg(screen)
+    environment_msg_text.draw(screen, 'ProterozoicEra')
+    time_frame += 1
     pygame.display.flip()
 
 pygame.quit()

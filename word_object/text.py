@@ -10,8 +10,8 @@ class Text(object):
         self.font_size = 24
         self.text = ''
 
-    def __call__(self, text, color=None, font_size=None, position=None, background_color=None,
-                 type_face=None):
+    def draw(self, screen, text, color=None, font_size=None, position=None, background_color=None,
+             type_face=None):
         self.type_face = type_face
         self.font_position = position
         self.background_color = background_color
@@ -23,5 +23,4 @@ class Text(object):
         text_obj_render = text_obj.render(text, True, (0, 0, 0), self.background_color)
         text_rect = text_obj_render.get_rect()
         text_rect.center = (120, 20)
-        return text_obj_render, text_rect
-
+        screen.blit(text_obj_render, text_rect)

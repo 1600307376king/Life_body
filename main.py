@@ -1,8 +1,11 @@
 from setting import *
-from word_object.text import Text
-from word_object.environment import Environment
+from world_object.text import Text
+from world_object.environment import Environment
+from world_object.ball import Ball
 import sys
 import pygame
+import time
+import datetime
 
 
 pygame.init()
@@ -10,21 +13,26 @@ screen = pygame.display.set_mode(SIZE)
 pygame.display.set_caption('ProterozoicEra')
 environment = Environment()
 environment_msg_text = Text()
-
-time_frame = 0
+ball = Ball()
 clock = pygame.time.Clock()
 
+current_time = INITIAL_TIME
+
 while True:
-    clock.tick(60)
+    clock.tick(FRAMES_NUMBER)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             sys.exit()
 
+    current_time += 1
     environment.draw_bg(screen)
     environment_msg_text.draw(screen, 'ProterozoicEra')
-    time_frame += 1
+    ball.display_speed_text(screen, environment_msg_text, current_time)
+    ball.change_ball_state(screen, 1/FRAMES_NUMBER, environment)
+
     pygame.display.flip()
+
 
 pygame.quit()
 

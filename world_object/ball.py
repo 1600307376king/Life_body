@@ -18,9 +18,9 @@ class Ball(object):
 
     def __init__(self):
         # unit: kg
-        self.mass = 1.0
+        self.mass = 1000.0
         # unit: meters
-        self.radius = 10
+        self.radius = 10.0
         self.color = (205, 149, 12)
         self.cur_x = init_x
         self.cur_y = init_y
@@ -39,7 +39,7 @@ class Ball(object):
 
         self.speed += ball_acceleration * time_frame
         if self.cur_y > 700:
-            self.speed = 0
+            self.speed = 0.0
         self.cur_y += self.speed * time_frame * self.direction[1]
         self.show(screen)
 
@@ -54,3 +54,10 @@ class Ball(object):
             init_ball_speed = self.get_cur_speed()
         env_text.draw(screen, str(init_ball_speed),
                       color=(255, 106, 106), font_size=16, position=(80, 80), typeface='georgia.ttf')
+
+    # 小球对其他物体的作用力 / the force of the ball on other objects
+    def ball_to_other_force(self, a, time_difference, other_speed=0):
+        relative_speed = self.speed - other_speed
+        force = self.mass * a + self.mass * relative_speed / time_difference
+        return force
+
